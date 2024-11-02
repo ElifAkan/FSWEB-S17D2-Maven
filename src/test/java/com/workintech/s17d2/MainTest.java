@@ -54,7 +54,7 @@ class MainTest {
         int actualId = developer.getId();
         String actualName = developer.getName();
         double actualSalary = developer.getSalary();
-        Experience actualExperience = developer.getExperience();
+        Experience actualExperience = developer.getExperince();
 
         
         assertEquals(expectedId, actualId, "The ID should match the expected value.");
@@ -191,14 +191,14 @@ class MainTest {
     @Test
     @DisplayName("DeveloperController:DeveloperMapCheck")
     @Order(1)
-    void developersMapShouldNotBeNullAfterInitialization() {
+    public void developersMapShouldNotBeNullAfterInitialization() {
         assertNotNull(controller.developers, "The developers map should be initialized (not null) after @PostConstruct");
     }
 
     @Test
     @DisplayName("DeveloperController:AddDeveloper")
     @Order(2)
-    void testAddDeveloper() throws Exception {
+    public void testAddDeveloper() throws Exception {
         Developer newDeveloper = new Developer(2, "New Developer", 6000.0, Experience.MID);
         mockMvc.perform(post("/developers")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -209,7 +209,7 @@ class MainTest {
     @Test
     @DisplayName("DeveloperController:GetAllDevelopers")
     @Order(3)
-    void testGetAllDevelopers() throws Exception {
+    public void testGetAllDevelopers() throws Exception {
         mockMvc.perform(get("/developers"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
@@ -219,7 +219,7 @@ class MainTest {
     @Test
     @DisplayName("DeveloperController:GetDeveloperById")
     @Order(4)
-    void testGetDeveloperById() throws Exception {
+    public void testGetDeveloperById() throws Exception {
         mockMvc.perform(get("/developers/{id}", 1))
                 .andExpect(status().isOk());
     }
@@ -227,7 +227,7 @@ class MainTest {
     @Test
     @DisplayName("DeveloperController:UpdateDeveloper")
     @Order(5)
-    void testUpdateDeveloper() throws Exception {
+    public void testUpdateDeveloper() throws Exception {
         Developer updatedDeveloper = new Developer(1, "Updated Developer", 7000.0, Experience.SENIOR);
         mockMvc.perform(put("/developers/{id}", 1)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -238,7 +238,7 @@ class MainTest {
     @Test
     @DisplayName("DeveloperController:DeleteDeveloper")
     @Order(6)
-    void testDeleteDeveloper() throws Exception {
+    public void testDeleteDeveloper() throws Exception {
         mockMvc.perform(delete("/developers/{id}", 1))
                 .andExpect(status().isOk());
     }
